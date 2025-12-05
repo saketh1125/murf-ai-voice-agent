@@ -46,6 +46,22 @@ It is specifically designed as an **Emergency Medical Assistant**, providing cle
 * Full `.env` API key protection
 
 ---
+murf-ai-voice-agent/
+│
+├── server.js
+├── package.json
+├── package-lock.json
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .env.example
+│
+├── public/
+   ├── index.html
+   ├── client.js
+   ├── recorderWorkletProcessor.js
+   └── styles.css
+
 
 ## 🧠 Tech Stack
 
