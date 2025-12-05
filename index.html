@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Voice Agent — UI</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#98a0aa; --accent:#7c3aed;
+      --user:#0ea5a4; --assistant:#111827; --bubble-user:#08303a;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,#071028 0%, #04131f 100%); color:#e6eef6;}
+    .app {max-width:980px;margin:28px auto;padding:20px;}
+    header{display:flex;align-items:center;gap:16px}
+    h1{margin:0;font-size:28px;letter-spacing:-0.3px}
+    .meta{margin-left:auto;text-align:right;font-size:13px;color:var(--muted)}
+    .status {display:inline-flex;gap:10px;align-items:center;margin-top:6px}
+    .dot{width:10px;height:10px;border-radius:999px;display:inline-block}
+    .dot.off{background:#7b8b95} .dot.on{background:#10b981} .dot.warn{background:#f59e0b}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)); border-radius:12px;padding:16px;margin-top:18px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .controls{display:flex;gap:12px;align-items:center}
+    button {background:#0b1220;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:10px 14px;border-radius:8px;font-size:15px;cursor:pointer}
+    button.primary{background:var(--accent);border-color:transparent;color:white;box-shadow:0 8px 20px rgba(124,58,237,0.18)}
+    button:disabled{opacity:0.5;cursor:not-allowed}
+    .row{display:flex;gap:12px;align-items:center}
+    .chat {margin-top:16px;display:flex;flex-direction:column;gap:12px;max-height:420px;overflow:auto;padding-right:6px}
+    .bubble{max-width:78%;padding:12px 14px;border-radius:14px;color:#e6eef6;line-height:1.3;box-shadow:0 6px 16px rgba(2,6,23,0.5)}
+    .bubble.user{margin-left:auto;background:linear-gradient(180deg,var(--user),#057b78);border-bottom-right-radius:6px}
+    .metaSmall{font-size:12px;color:var(--muted);margin-top:6px}
+    .bubble.assistant{background:linear-gradient(180deg,#0b1220,#081022);border-bottom-left-radius:6px}
+    .controlsBar{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:12px}
+    .small{font-size:13px;color:var(--muted)}
+    .subtitle{color:var(--muted);font-size:13px;margin-top:6px}
+    .speaker {display:flex;align-items:center;gap:8px}
+    .progress {width:220px;height:8px;background:#0b1220;border-radius:999px;overflow:hidden}
+    .progress > i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7c3aed,#0ea5a4)}
+    .settings {margin-left:12px;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;font-size:13px;color:var(--muted)}
+    footer{margin-top:18px;font-size:12px;color:var(--muted);text-align:center}
+    /* responsive */
+    @media (max-width:640px){ .app{padding:12px} .progress{width:140px} .chat{max-height:60vh} }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>Voice Agent — demo</h1>
+        <div class="subtitle">AssemblyAI → Groq (Llama 3.1) → Murf (Falcon TTS)</div>
+      </div>
+      <div class="meta">
+        <div class="status">
+          <span id="connDot" class="dot off"></span>
+          <div id="connText" class="small">disconnected</div>
+        </div>
+        <div class="metaSmall" style="margin-top:8px">Local demo • <span id="voiceId">voice: natalie</span></div>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="controls">
+        <div class="row">
+          <button id="startBtn" class="primary">Start</button>
+          <button id="stopBtn" disabled>Stop</button>
+          <div style="width:8px"></div>
+          <div class="small">Mic status: <strong id="micStatus">idle</strong></div>
+        </div>
+
+        <div style="margin-left:auto" class="speaker">
+          <div id="assistantState" class="small">assistant: idle</div>
+          <div class="progress" title="Playback progress"><i id="playProgress"></i></div>
+          <div style="width:8px"></div>
+          <div class="settings">
+            <label style="display:block">Voice
+              <select id="voiceSelect" style="margin-top:6px;background:transparent;border:0;color:var(--muted)"><option value="en-US-natalie">natalie</option><option value="en-US-jane">jane</option></select>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat" id="chat"></div>
+
+      <div class="controlsBar">
+        <div class="small">Transcript (live): <span id="liveText" style="color:#fff;margin-left:6px"></span></div>
+        <div class="small">Assembly status: <span id="assemblyStatus" style="color:var(--muted)">waiting</span></div>
+      </div>
+    </div>
+
+    <footer>Tip: press Start → speak a short sentence → Stop. Toggle voices in settings.</footer>
+  </div>
+
+  <script src="client.js"></script>
+</body>
+</html>
