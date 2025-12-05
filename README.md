@@ -251,9 +251,4 @@ Then open a Pull Request.
 This project is licensed under the **MIT License**.
 
 ---
-* A project logo
-* A diagram image
-* Shields.io badges
-* A shorter README version
 
-Just tell me!
