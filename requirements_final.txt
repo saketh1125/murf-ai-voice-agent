@@ -1,0 +1,7 @@
+streamlit
+requests
+assemblyai
+groq
+fastapi
+uvicorn[standard]
+python-multipart
