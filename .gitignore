@@ -1,0 +1,29 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Generated files
+generated_audio/
+temp_*.wav
+*.mp3
+
+# Sample files (optional - remove if you want to include)
+Samplemurf.wav
+
+# OS
+.DS_Store
+Thumbs.db
